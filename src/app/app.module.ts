@@ -17,6 +17,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/categories', pathMatch: 'full' },
   { path: '', component: HomeComponent, children: [
     { path: 'categories', component: CategoriesComponent },
     { path: 'new-post', component: NewPostComponent },
