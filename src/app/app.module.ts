@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { NavbarTopComponent } from './navbar-top/navbar-top.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 
 @NgModule({
