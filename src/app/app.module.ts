@@ -6,8 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { CategoriesComponent } from './components/categories/categories.component';
 import { HomeComponent } from './components/home/home.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const appRoutes: Routes = [
   { path: '**', component: HomeComponent }
@@ -18,8 +18,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarTopComponent,
     BreadcrumbComponent,
-    CategoriesComponent,
-    HomeComponent
+    HomeComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
