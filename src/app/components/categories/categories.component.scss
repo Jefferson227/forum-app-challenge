@@ -1,0 +1,9 @@
+.new-post {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .empty-column {
+        display: none;
+    }
+}

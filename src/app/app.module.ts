@@ -13,13 +13,16 @@ import { PostComponent } from './components/post/post.component';
 import { PostContentComponent } from './components/post-content/post-content.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { LoginComponent } from './components/login/login.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'new-post', component: NewPostComponent },
-  { path: 'post-content', component: PostContentComponent },
-  { path: 'posts', component: PostsComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent, children: [
+    { path: 'categories', component: CategoriesComponent },
+    { path: 'new-post', component: NewPostComponent },
+    { path: 'post-content', component: PostContentComponent },
+    { path: 'posts', component: PostsComponent }
+  ] }
 ];
 
 @NgModule({
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     PostComponent,
     PostContentComponent,
     NewPostComponent,
-    LoginComponent
+    LoginComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
