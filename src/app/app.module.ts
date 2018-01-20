@@ -8,8 +8,11 @@ import { NavbarTopComponent } from './components/navbar-top/navbar-top.component
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoryComponent } from './components/category/category.component';
+import { PostsComponent } from './components/posts/posts.component';
+import { PostComponent } from './components/post/post.component';
 
 const appRoutes: Routes = [
+  { path: 'posts', component: PostsComponent },
   { path: '**', component: HomeComponent }
 ];
 
@@ -19,7 +22,9 @@ const appRoutes: Routes = [
     NavbarTopComponent,
     BreadcrumbComponent,
     HomeComponent,
-    CategoryComponent
+    CategoryComponent,
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
