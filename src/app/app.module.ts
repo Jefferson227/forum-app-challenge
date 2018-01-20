@@ -15,14 +15,16 @@ import { NewPostComponent } from './components/new-post/new-post.component';
 import { LoginComponent } from './components/login/login.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 
+import { AuthGuard } from './providers/auth/auth.guard';
+
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/categories', pathMatch: 'full' },
   { path: '', component: HomeComponent, children: [
-    { path: 'categories', component: CategoriesComponent },
-    { path: 'new-post', component: NewPostComponent },
-    { path: 'post-content', component: PostContentComponent },
-    { path: 'posts', component: PostsComponent }
+    { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+    { path: 'new-post', component: NewPostComponent, canActivate: [AuthGuard] },
+    { path: 'post-content', component: PostContentComponent, canActivate: [AuthGuard] },
+    { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] }
   ] }
 ];
 
@@ -44,7 +46,9 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
