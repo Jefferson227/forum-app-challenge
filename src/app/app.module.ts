@@ -11,8 +11,10 @@ import { CategoryComponent } from './components/category/category.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { PostContentComponent } from './components/post-content/post-content.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 const appRoutes: Routes = [
+  { path: 'new-post', component: NewPostComponent },
   { path: 'post-content', component: PostContentComponent },
   { path: 'posts', component: PostsComponent },
   { path: '**', component: HomeComponent }
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     CategoryComponent,
     PostsComponent,
     PostComponent,
-    PostContentComponent
+    PostContentComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
