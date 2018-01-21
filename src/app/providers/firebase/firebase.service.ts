@@ -5,13 +5,25 @@ import * as firebase from 'firebase';
 export class FirebaseService {
 
   constructor() { 
-    let config = {
-      apiKey: "<API_KEY>",
-      authDomain: "<PROJECT_ID>.firebaseapp.com",
-      databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
-      storageBucket: "<BUCKET>.appspot.com",
-    };
-    firebase.initializeApp(config);
   }
 
+  initializeFirebase() {
+    let config = {
+      apiKey: "AIzaSyA3A60PNVTjLDhXNpVKDhjntcp7KSsWAp4",
+      authDomain: "forum-app-challenge.firebaseapp.com",
+      databaseURL: "https://forum-app-challenge.firebaseio.com",
+      storageBucket: "forum-app-challenge.appspot.com",
+      messagingSenderId: "937135036055"
+    };
+
+    firebase.initializeApp(config);
+    return firebase;
+  }
+
+  authenticate() {
+    let firebaseInstance = this.initializeFirebase();
+    let provider = new firebase.auth.GoogleAuthProvider();
+
+    return firebaseInstance.auth().signInWithPopup(provider);
+  }
 }

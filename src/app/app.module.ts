@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 
 import { AuthGuard } from './providers/auth/auth.guard';
+import { FirebaseService } from './providers/firebase/firebase.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })
