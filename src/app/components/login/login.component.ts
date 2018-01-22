@@ -25,7 +25,12 @@ export class LoginComponent implements OnInit {
         var user = result.user;
 
         localStorage.setItem('user', JSON.stringify(user));
-        this._router.navigate(['/categories']);
+
+        // TODO: remove this workaround to work correctly with Angular Routing
+        window.location.href = '/';
+
+        // The code below should work but not
+        // this._router.navigate(['/categories']);
       })
       .catch((error: any) => {
         var errorCode = error.code;
