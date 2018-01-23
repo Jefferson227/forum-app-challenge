@@ -16,11 +16,13 @@ export class DiscussionsComponent implements OnInit {
     discussionObservable.on('value', snap => {
       const firebaseObj = snap.val();
 
-      this.discussions = Object.keys(firebaseObj).map(item => {
-        let _item = firebaseObj[item];
-        _item.timestamp = this.transformDate(_item.timestamp);
+      this.discussions = Object.keys(firebaseObj).map(hash => {
+        let discussionObj = firebaseObj[hash];
 
-        return _item;
+        discussionObj.timestamp = this.transformDate(discussionObj.timestamp);
+        discussionObj.hash = hash;
+
+        return discussionObj;
       });
       console.log(this.discussions);
     });

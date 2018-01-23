@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-discussion',
@@ -12,10 +13,16 @@ export class DiscussionComponent implements OnInit {
   @Input() date;
   @Input() title;
   @Input() user;
+  @Input() hash;
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToDiscussion(discussionHash) {
+    debugger;
+    this._router.navigate(['/discussion-content', discussionHash]);
   }
 
 }

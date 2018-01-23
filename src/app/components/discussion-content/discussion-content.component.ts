@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-discussion-content',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiscussionContentComponent implements OnInit {
 
-  constructor() { }
+  discussionHash;
+
+  constructor(private _route: ActivatedRoute) {
+    this.discussionHash = this._route.snapshot.params['hash'];
+  }
 
   ngOnInit() {
   }
