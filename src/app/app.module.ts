@@ -18,6 +18,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 
 import { AuthGuard } from './providers/auth/auth.guard';
 import { FirebaseService } from './providers/firebase/firebase.service';
+import { UtilsService } from './providers/utils/utils.service';
 import { DiscussionsComponent } from './components/discussions/discussions.component';
 import { DiscussionComponent } from './components/discussion/discussion.component';
 import { NewDiscussionComponent } from './components/new-discussion/new-discussion.component';
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthGuard,
-    FirebaseService
+    FirebaseService,
+    UtilsService,
   ],
   bootstrap: [AppComponent]
 })

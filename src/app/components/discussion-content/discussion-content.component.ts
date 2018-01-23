@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../providers/firebase/firebase.service';
-import * as moment from 'moment';
+import { UtilsService } from '../../providers/utils/utils.service';
 
 @Component({
   selector: 'app-discussion-content',
@@ -15,12 +15,14 @@ export class DiscussionContentComponent implements OnInit {
   title;
   message;
   comment;
+  timestamp;
   comments = [];
   canDeleteDiscussion = false;
 
   constructor(
     private _route: ActivatedRoute,
     private _firebase: FirebaseService,
+    private _utils: UtilsService,
   ) {
     this.discussionHash = this._route.snapshot.params['hash'];
     this.getDataFromDiscussion();
@@ -49,6 +51,7 @@ export class DiscussionContentComponent implements OnInit {
       this.title = discussionObj.title;
       this.message = discussionObj.message;
       this.comments = Object.keys(discussionObj.comments);
+      this.timestamp = this._utils.transformDate(discussionObj.timestamp);
       this.canDeleteDiscussion = this.checkIfCanDeleteDiscussion(this.user);
 
       this.transformCommentsObjectIntoArray(discussionObj);
@@ -66,15 +69,11 @@ export class DiscussionContentComponent implements OnInit {
     this.comment = '';
   }
 
-  transformDate(timestamp) {
-    return moment(timestamp).format('YYYY-MM-DD hh:mm:ss');
-  }
-
   transformCommentsObjectIntoArray(discussionObj) {
     this.comments = this.comments.map(item => {
       let _item = discussionObj.comments[item];
 
-      _item.timestamp = this.transformDate(_item.timestamp);
+      _item.timestamp = this._utils.transformDate(_item.timestamp);
       return _item;
     });
   }
