@@ -21,7 +21,6 @@ export class DiscussionComponent implements OnInit {
   }
 
   goToDiscussion(discussionHash) {
-    debugger;
     this._router.navigate(['/discussion-content', discussionHash]);
   }
 

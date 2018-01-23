@@ -82,10 +82,6 @@ export class FirebaseService {
   }
 
   getDataFromDiscussion(discussionHash) {
-    const discussionRef = this.firebaseInstance.database().ref(`/discussions/${discussionHash}`);
-
-    discussionRef.on('value', snap => {
-      console.log(snap.val());
-    });
+    return this.firebaseInstance.database().ref(`/discussions/${discussionHash}`);
   }
 }
