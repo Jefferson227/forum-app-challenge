@@ -18,11 +18,15 @@ import { CategoriesComponent } from './components/categories/categories.componen
 
 import { AuthGuard } from './providers/auth/auth.guard';
 import { FirebaseService } from './providers/firebase/firebase.service';
+import { DiscussionsComponent } from './components/discussions/discussions.component';
+import { DiscussionComponent } from './components/discussion/discussion.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/categories', pathMatch: 'full' },
+  { path: '', redirectTo: '/discussions', pathMatch: 'full' },
   { path: '', component: HomeComponent, children: [
+    { path: 'discussions', component: DiscussionsComponent, canActivate: [AuthGuard] },
+    { path: 'discussion', component: DiscussionComponent, canActivate: [AuthGuard] },
     { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
     { path: 'new-post', component: NewPostComponent, canActivate: [AuthGuard] },
     { path: 'post-content', component: PostContentComponent, canActivate: [AuthGuard] },
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
     PostContentComponent,
     NewPostComponent,
     LoginComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    DiscussionsComponent,
+    DiscussionComponent
   ],
   imports: [
     BrowserModule,

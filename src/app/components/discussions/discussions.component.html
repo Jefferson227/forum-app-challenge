@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    <app-breadcrumb></app-breadcrumb>
+  
+    <section class="section">
+      <div class="columns">
+        <div class="column empty-column is-3"></div>
+    
+        <div class="column is-6">
+          <button class="button is-primary new-discussion" (click)="createNewDiscussion()">New Discussion</button>
+        </div>
+    
+        <div class="column empty-column is-3"></div>
+      </div>
+
+      <div class="notification">
+        <app-discussion></app-discussion>
+      </div>
+
+      <div class="notification">
+        <app-discussion></app-discussion>
+      </div>
+
+      <!-- <div class="notification">
+        <app-category></app-category>
+      </div>
+      <div class="notification">
+        <app-category></app-category>
+      </div>
+      <div class="notification">
+        <app-category></app-category>
+      </div> -->
+    </section>
+  </div>
+</section>
