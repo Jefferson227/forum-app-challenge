@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <app-breadcrumb></app-breadcrumb>
+
+    <section class="section">
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input" [(ngModel)]="title" type="text" placeholder="Title">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Message</label>
+        <div class="control">
+          <textarea class="textarea" [(ngModel)]="message" placeholder="Message"></textarea>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button (click)="createNewDiscussion()" class="button is-link">Create</button>
+        </div>
+        <div class="control">
+          <button routerLink="/" class="button is-text">Cancel</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
