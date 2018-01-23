@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../providers/firebase/firebase.service';
 
 @Component({
   selector: 'app-navbar-top',
@@ -9,18 +10,21 @@ import { Router } from '@angular/router';
 export class NavbarTopComponent implements OnInit {
   username;
 
-  constructor(private _router: Router) { }
+  constructor(
+    private _router: Router,
+    private _firebaseService: FirebaseService,
+  ) { }
 
   ngOnInit() {
     let user = localStorage.getItem('user')
                  ? JSON.parse(localStorage.getItem('user'))
                  : localStorage.getItem('user');
 
-    this.username = user.displayName;
+    this.username = user.displayName || user.email;
   }
 
   logout() {
-    localStorage.clear();
+    this._firebaseService.signOut();
     this._router.navigate(['/login']);
   }
 }
