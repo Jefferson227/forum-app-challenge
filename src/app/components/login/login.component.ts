@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  email;
+  password;
+
   constructor(
     private _firebaseService: FirebaseService,
     private _router: Router
