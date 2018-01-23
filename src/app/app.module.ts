@@ -21,6 +21,7 @@ import { FirebaseService } from './providers/firebase/firebase.service';
 import { DiscussionsComponent } from './components/discussions/discussions.component';
 import { DiscussionComponent } from './components/discussion/discussion.component';
 import { NewDiscussionComponent } from './components/new-discussion/new-discussion.component';
+import { DiscussionContentComponent } from './components/discussion-content/discussion-content.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     { path: 'discussions', component: DiscussionsComponent, canActivate: [AuthGuard] },
     { path: 'discussion', component: DiscussionComponent, canActivate: [AuthGuard] },
     { path: 'new-discussion', component: NewDiscussionComponent, canActivate: [AuthGuard] },
+    { path: 'discussion-content/:hash', component: DiscussionContentComponent, canActivate: [AuthGuard] },
     { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
     { path: 'new-post', component: NewPostComponent, canActivate: [AuthGuard] },
     { path: 'post-content', component: PostContentComponent, canActivate: [AuthGuard] },
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
     CategoriesComponent,
     DiscussionsComponent,
     DiscussionComponent,
-    NewDiscussionComponent
+    NewDiscussionComponent,
+    DiscussionContentComponent
   ],
   imports: [
     BrowserModule,
