@@ -13,12 +13,29 @@ export class DiscussionContentComponent implements OnInit {
   user;
   title;
   message;
+  canDeleteDiscussion = false;
 
   constructor(
     private _route: ActivatedRoute,
     private _firebase: FirebaseService,
   ) {
     this.discussionHash = this._route.snapshot.params['hash'];
+    this.getDataFromDiscussion();
+  }
+
+  ngOnInit() {
+  }
+
+  getCurrentUsernameLogged() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user.displayName || user.email;
+  }
+
+  checkIfCanDeleteDiscussion(userWhoCreatedDiscussion) {
+    return userWhoCreatedDiscussion === this.getCurrentUsernameLogged();
+  }
+
+  getDataFromDiscussion() {
     const discussionObservable = this._firebase.getDataFromDiscussion(this.discussionHash);
 
     discussionObservable.on('value', snap => {
@@ -28,10 +45,7 @@ export class DiscussionContentComponent implements OnInit {
       this.user = discussionObj.user;
       this.title = discussionObj.title;
       this.message = discussionObj.message;
+      this.canDeleteDiscussion = this.checkIfCanDeleteDiscussion(this.user);
     });
   }
-
-  ngOnInit() {
-  }
-
 }

@@ -5,7 +5,7 @@
     <section class="section">
       <div class="columns">
         <div class="column">
-          <button routerLink="/new-post" class="button is-danger">Delete this post</button>
+          <button *ngIf="canDeleteDiscussion" routerLink="/" class="button is-danger">Delete this post</button>
         </div>
       </div>
 
