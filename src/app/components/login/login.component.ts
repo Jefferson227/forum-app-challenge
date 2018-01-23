@@ -43,4 +43,8 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  authenticateWithEmailAndPassword() {
+    this._firebaseService
+      .authenticateWithEmailAndPassword(this.email, this.password);
+  }
 }
