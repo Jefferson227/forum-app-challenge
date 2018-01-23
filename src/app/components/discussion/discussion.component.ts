@@ -14,6 +14,7 @@ export class DiscussionComponent implements OnInit {
   @Input() title;
   @Input() user;
   @Input() hash;
+  @Input() numberOfComments;
 
   constructor(private _router: Router) { }
 

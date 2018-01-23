@@ -21,6 +21,10 @@ export class DiscussionsComponent implements OnInit {
 
         discussionObj.timestamp = this.transformDate(discussionObj.timestamp);
         discussionObj.hash = hash;
+        discussionObj.comments = discussionObj.comments || [];
+        discussionObj.numberOfComments = Object.keys(discussionObj.comments)
+                                          .map(commentHash => discussionObj.comments[commentHash])
+                                          .length;
 
         return discussionObj;
       });
