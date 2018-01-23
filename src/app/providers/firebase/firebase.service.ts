@@ -69,18 +69,15 @@ export class FirebaseService {
     //   console.log(snap.val());
     // });
 
-    discussionsRef.on('value', snap => {
-      console.log(snap.val());
-    });
+    // discussionsRef.on('value', snap => {
+    //   debugger;
+    //   console.log(snap.val());
+    // });
 
     discussionsRef.push(discussionObj);
   }
 
   getAllDiscussions() {
-    const discussionsRef = this.databaseRef.child('discussions');
-
-    discussionsRef.on('value', snap => {
-      console.log(snap.val());
-    });
+    return this.databaseRef.child('discussions');
   }
 }

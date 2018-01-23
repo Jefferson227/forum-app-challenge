@@ -13,12 +13,15 @@
         <div class="column empty-column is-3"></div>
       </div>
 
-      <div class="notification">
-        <app-discussion></app-discussion>
-      </div>
-
-      <div class="notification">
-        <app-discussion></app-discussion>
+      <div *ngFor="let discussion of discussions">
+        <div class="notification">
+          <app-discussion
+            [message]="discussion.message"
+            [date]="discussion.timestamp"
+            [title]="discussion.title"
+            [user]="discussion.user"
+          ></app-discussion>
+        </div>
       </div>
 
       <!-- <div class="notification">

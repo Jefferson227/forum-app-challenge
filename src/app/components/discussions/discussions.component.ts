@@ -7,9 +7,17 @@ import { FirebaseService } from '../../providers/firebase/firebase.service';
   styleUrls: ['./discussions.component.scss']
 })
 export class DiscussionsComponent implements OnInit {
+  discussions = [];
 
   constructor(private _firebaseService: FirebaseService) {
-    this._firebaseService.getAllDiscussions();
+    const discussionObservable = this._firebaseService.getAllDiscussions();
+
+    discussionObservable.on('value', snap => {
+      // console.log(snap.val());
+      const firebaseObj = snap.val();
+      this.discussions = Object.keys(firebaseObj).map(item => firebaseObj[item]);
+      console.log(this.discussions);
+    });
   }
 
   ngOnInit() {
