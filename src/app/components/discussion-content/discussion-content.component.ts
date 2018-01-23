@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../providers/firebase/firebase.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-discussion-content',
@@ -13,6 +14,8 @@ export class DiscussionContentComponent implements OnInit {
   user;
   title;
   message;
+  comment;
+  comments = [];
   canDeleteDiscussion = false;
 
   constructor(
@@ -45,7 +48,34 @@ export class DiscussionContentComponent implements OnInit {
       this.user = discussionObj.user;
       this.title = discussionObj.title;
       this.message = discussionObj.message;
+      this.comments = Object.keys(discussionObj.comments);
       this.canDeleteDiscussion = this.checkIfCanDeleteDiscussion(this.user);
+
+      this.transformCommentsObjectIntoArray(discussionObj);
+    });
+  }
+
+  addComment() {
+    const commentObj = {
+      comment: this.comment,
+      user: this.getCurrentUsernameLogged(),
+      timestamp: new Date().getTime()
+    };
+
+    this._firebase.addCommentToADiscussion(this.discussionHash, commentObj);
+    this.comment = '';
+  }
+
+  transformDate(timestamp) {
+    return moment(timestamp).format('YYYY-MM-DD hh:mm:ss');
+  }
+
+  transformCommentsObjectIntoArray(discussionObj) {
+    this.comments = this.comments.map(item => {
+      let _item = discussionObj.comments[item];
+
+      _item.timestamp = this.transformDate(_item.timestamp);
+      return _item;
     });
   }
 }
