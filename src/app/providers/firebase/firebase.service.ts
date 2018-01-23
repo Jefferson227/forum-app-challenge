@@ -4,7 +4,10 @@ import * as firebase from 'firebase';
 @Injectable()
 export class FirebaseService {
 
+  firebaseInstance;
+
   constructor() { 
+    this.initializeFirebase();
   }
 
   initializeFirebase() {
@@ -16,14 +19,12 @@ export class FirebaseService {
       messagingSenderId: "937135036055"
     };
 
-    firebase.initializeApp(config);
-    return firebase;
+    this.firebaseInstance = firebase;
+    this.firebaseInstance.initializeApp(config);
   }
 
   authenticate() {
-    let firebaseInstance = this.initializeFirebase();
     let provider = new firebase.auth.GoogleAuthProvider();
-
-    return firebaseInstance.auth().signInWithPopup(provider);
+    return this.firebaseInstance.auth().signInWithPopup(provider);
   }
 }
