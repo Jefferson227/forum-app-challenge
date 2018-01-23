@@ -23,7 +23,7 @@ export class FirebaseService {
     this.firebaseInstance.initializeApp(config);
   }
 
-  authenticate() {
+  authenticateWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
     return this.firebaseInstance.auth().signInWithPopup(provider);
   }

@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  authenticate() {
+  authenticateWithGoogle() {
     this._firebaseService
-      .authenticate()
+      .authenticateWithGoogle()
       .then((result: any) => {
         var token = result.credential.accessToken;
         var user = result.user;
