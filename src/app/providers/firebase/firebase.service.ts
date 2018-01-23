@@ -7,6 +7,7 @@ export class FirebaseService {
 
   firebaseInstance;
   firebaseAuth;
+  databaseRef;
 
   constructor(private _router: Router) {
     this.initializeFirebase();
@@ -26,6 +27,7 @@ export class FirebaseService {
     this.firebaseInstance = firebase;
     this.firebaseInstance.initializeApp(config);
     this.firebaseAuth = this.firebaseInstance.auth();
+    this.databaseRef = this.firebaseInstance.database().ref();
 
     // Activating listener for user logged by email and password
     this.onAuthStateChanged();
@@ -55,5 +57,30 @@ export class FirebaseService {
   signOut() {
     localStorage.clear();
     this.firebaseAuth.signOut();
+  }
+
+  createNewDiscussion(discussionObj) {
+    console.log('trying to create a discussion list');
+    const discussionsRef = this.databaseRef.child('discussions');
+    // const subdiscussionsRef = discussionsRef.orderByChild('name').equalTo('Jefferson');
+    // console.log(subdiscussionsRef);
+
+    // subdiscussionsRef.on('value', snap => {
+    //   console.log(snap.val());
+    // });
+
+    discussionsRef.on('value', snap => {
+      console.log(snap.val());
+    });
+
+    discussionsRef.push(discussionObj);
+  }
+
+  getAllDiscussions() {
+    const discussionsRef = this.databaseRef.child('discussions');
+
+    discussionsRef.on('value', snap => {
+      console.log(snap.val());
+    });
   }
 }

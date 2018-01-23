@@ -8,12 +8,11 @@ import { FirebaseService } from '../../providers/firebase/firebase.service';
 })
 export class DiscussionsComponent implements OnInit {
 
-  constructor(private _firebaseService: FirebaseService) { }
+  constructor(private _firebaseService: FirebaseService) {
+    this._firebaseService.getAllDiscussions();
+  }
 
   ngOnInit() {
   }
 
-  createNewDiscussion() {
-    this._firebaseService.createNewDiscussion();
-  }
 }
