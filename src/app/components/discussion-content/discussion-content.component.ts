@@ -53,7 +53,7 @@ export class DiscussionContentComponent implements OnInit {
       this.title = discussionObj.title;
       this.message = discussionObj.message;
       this.comments = Object.keys(discussionObj.comments || []);
-      this.timestamp = this._utils.transformDate(discussionObj.timestamp);
+      this.timestamp = this._utils.transformDate(discussionObj.timestamp, 'seconds', 60);
       this.canDeleteDiscussion = this.checkIfCanDeleteDiscussion(this.user);
 
       this.transformCommentsObjectIntoArray(discussionObj);
@@ -81,7 +81,7 @@ export class DiscussionContentComponent implements OnInit {
       let _item = discussionObj.comments[item];
 
       _item.timestampInt = _item.timestamp;
-      _item.timestamp = this._utils.transformDate(_item.timestamp);
+      _item.timestamp = this._utils.transformDate(_item.timestamp, 'seconds', 60);
       return _item;
     });
 

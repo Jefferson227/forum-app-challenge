@@ -25,7 +25,7 @@ export class DiscussionsComponent implements OnInit {
         let discussionObj = firebaseObj[hash];
 
         discussionObj.timestampInt = discussionObj.timestamp;
-        discussionObj.timestamp = this._utils.transformDate(discussionObj.timestamp);
+        discussionObj.timestamp = this._utils.transformDate(discussionObj.timestamp, 'seconds', 60);
         discussionObj.hash = hash;
         discussionObj.comments = discussionObj.comments || [];
         discussionObj.numberOfComments = Object.keys(discussionObj.comments)

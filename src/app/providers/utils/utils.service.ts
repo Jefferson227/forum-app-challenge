@@ -6,41 +6,45 @@ export class UtilsService {
 
   constructor() { }
 
-  transformDate(timestamp) {
-    let diff = moment(new Date()).diff(timestamp, 'seconds');
-    let value = '';
+  transformDate(timestamp, timeType, limitValue) {
+    let diff = moment(new Date()).diff(timestamp, timeType);
+    const types = {
+      seconds: {
+        nextType: 'minutes',
+        limitValue: 60,
+        suffix: 's',
+      },
+      minutes: {
+        nextType: 'hours',
+        limitValue: 24,
+        suffix: 'm',
+      },
+      hours: {
+        nextType: 'days',
+        limitValue: 31,
+        suffix: 'h',
+      },
+      days: {
+        nextType: 'months',
+        limitValue: 12,
+        suffix: 'd',
+      },
+      months: {
+        nextType: 'years',
+        limitValue: 0,
+        suffix: 'mo',
+      },
+      years: {
+        nextType: null,
+        limitValue: 0,
+        suffix: 'y',
+      },
+    };
 
-    if (diff > 60) {
-      diff = moment(new Date()).diff(timestamp, 'minutes');
-
-      if (diff > 60) {
-        diff = moment(new Date()).diff(timestamp, 'hours');
-
-        if (diff > 24) {
-          diff = moment(new Date()).diff(timestamp, 'days');
-
-          if (diff > 31) {
-            diff = moment(new Date()).diff(timestamp, 'months');
-
-            if (diff > 12) {
-              diff = moment(new Date()).diff(timestamp, 'years');
-              value = diff + 'y';
-            } else {
-              value = diff + 'mo';
-            }
-          } else {
-            value = diff + 'd';
-          }
-        } else {
-          value = diff + 'h';
-        }
-      } else {
-        value = diff + 'm';
-      }
-    } else {
-      value = diff + 's';
+    if (diff > limitValue) {
+      return this.transformDate(timestamp, types[timeType].nextType, types[timeType].limitValue);
     }
 
-    return value;
+    return `${diff}${types[timeType].suffix}`;
   }
 }
