@@ -50,7 +50,7 @@ export class DiscussionContentComponent implements OnInit {
       this.user = discussionObj.user;
       this.title = discussionObj.title;
       this.message = discussionObj.message;
-      this.comments = Object.keys(discussionObj.comments);
+      this.comments = Object.keys(discussionObj.comments || []);
       this.timestamp = this._utils.transformDate(discussionObj.timestamp);
       this.canDeleteDiscussion = this.checkIfCanDeleteDiscussion(this.user);
 
@@ -73,8 +73,19 @@ export class DiscussionContentComponent implements OnInit {
     this.comments = this.comments.map(item => {
       let _item = discussionObj.comments[item];
 
+      _item.timestampInt = _item.timestamp;
       _item.timestamp = this._utils.transformDate(_item.timestamp);
       return _item;
+    });
+
+    this.comments.sort((a, b) => {
+      if (a.timestampInt < b.timestampInt) {
+        return 1;
+      } else if (a.timestampInt > b.timestampInt) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
   }
 }

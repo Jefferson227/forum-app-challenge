@@ -19,9 +19,10 @@ export class DiscussionsComponent implements OnInit {
     discussionObservable.on('value', snap => {
       const firebaseObj = snap.val();
 
-      this.discussions = Object.keys(firebaseObj).map(hash => {
+      this.discussions = Object.keys(firebaseObj || []).map(hash => {
         let discussionObj = firebaseObj[hash];
 
+        discussionObj.timestampInt = discussionObj.timestamp;
         discussionObj.timestamp = this._utils.transformDate(discussionObj.timestamp);
         discussionObj.hash = hash;
         discussionObj.comments = discussionObj.comments || [];
@@ -31,7 +32,16 @@ export class DiscussionsComponent implements OnInit {
 
         return discussionObj;
       });
-      console.log(this.discussions);
+
+      this.discussions.sort((a, b) => {
+        if (a.timestampInt < b.timestampInt) {
+          return 1;
+        } else if (a.timestampInt > b.timestampInt) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
     });
   }
 
