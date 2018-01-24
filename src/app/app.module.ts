@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     AuthGuard,
     FirebaseService,
     UtilsService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })
