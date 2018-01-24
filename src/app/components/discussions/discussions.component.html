@@ -13,6 +13,7 @@
         <div class="column empty-column is-3"></div>
       </div>
 
+      <div *ngIf="!discussions.length">Well, no discussions have been started yet.</div>
       <div *ngFor="let discussion of discussions">
         <div class="notification">
           <app-discussion
