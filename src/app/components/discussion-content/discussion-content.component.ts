@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../providers/firebase/firebase.service';
 import { UtilsService } from '../../providers/utils/utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-discussion-content',
@@ -23,6 +24,7 @@ export class DiscussionContentComponent implements OnInit {
     private _route: ActivatedRoute,
     private _firebase: FirebaseService,
     private _utils: UtilsService,
+    private _router: Router,
   ) {
     this.discussionHash = this._route.snapshot.params['hash'];
     this.getDataFromDiscussion();
@@ -44,8 +46,8 @@ export class DiscussionContentComponent implements OnInit {
     const discussionObservable = this._firebase.getDataFromDiscussion(this.discussionHash);
 
     discussionObservable.on('value', snap => {
-      console.log(snap.val());
       const discussionObj = snap.val();
+      if (!discussionObj) { return; }
 
       this.user = discussionObj.user;
       this.title = discussionObj.title;
@@ -67,6 +69,11 @@ export class DiscussionContentComponent implements OnInit {
 
     this._firebase.addCommentToADiscussion(this.discussionHash, commentObj);
     this.comment = '';
+  }
+
+  deleteComment() {
+    this._firebase.deleteCommentToADiscussion(this.discussionHash);
+    this._router.navigate(['/']);
   }
 
   transformCommentsObjectIntoArray(discussionObj) {

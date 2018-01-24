@@ -87,7 +87,11 @@ export class FirebaseService {
 
   addCommentToADiscussion(discussionHash, commentObj) {
     const discussionRef = this.firebaseInstance.database().ref(`/discussions/${discussionHash}`);
-
     discussionRef.child('comments').push(commentObj);
+  }
+
+  deleteCommentToADiscussion(discussionHash) {
+    const discussionRef = this.firebaseInstance.database().ref(`/discussions/${discussionHash}`);
+    discussionRef.remove();
   }
 }

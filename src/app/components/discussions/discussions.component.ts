@@ -19,6 +19,8 @@ export class DiscussionsComponent implements OnInit {
     discussionObservable.on('value', snap => {
       const firebaseObj = snap.val();
 
+      if (!firebaseObj) { return; }
+
       this.discussions = Object.keys(firebaseObj || []).map(hash => {
         let discussionObj = firebaseObj[hash];
 
